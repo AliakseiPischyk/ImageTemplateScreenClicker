@@ -101,6 +101,7 @@ class Clicker:
             Waiter.chill()
             self.click_reviews()
             time.sleep(self.wait_after_reviews_before_ok)
+            Waiter.chill()
             self.click_oks()
 
 
