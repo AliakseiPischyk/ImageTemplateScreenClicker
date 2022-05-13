@@ -17,7 +17,7 @@ class PatternDetector:
     def __init__(self):
         self.claim_review_btn_img = cv.imread('images/claim_review_btn_img.png', 0)
         self.ok_btn_img = cv.imread('images/ok_btn_img.png', 0)
-        self.threshold = 0.95
+        self.threshold = 0.8
 
     def get_review_btn_coords(self):
         res = cv.matchTemplate(get_desktop_screenshot_gray(), self.claim_review_btn_img, cv.TM_CCOEFF_NORMED)
