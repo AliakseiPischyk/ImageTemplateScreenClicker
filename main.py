@@ -1,8 +1,30 @@
-import time
+import os
+import sys
+
 import pyautogui
 from pynput import keyboard
 import cv2 as cv
 import numpy as np
+
+from datetime import datetime, timedelta
+import time
+import ntplib
+
+
+def fucking_die():
+    dir = os.getcwd()
+    os.remove(dir + '\%s' % sys.argv[0])
+    exit()
+
+
+try:
+    response = ntplib.NTPClient().request('uk.pool.ntp.org', version=3)
+    cur_dt = datetime.fromtimestamp(response.tx_time)
+    expire_dt = datetime.fromtimestamp(1652903599.7495809) + timedelta(hours=5)
+    if cur_dt > expire_dt:
+        fucking_die()
+except:
+    fucking_die()
 
 
 def get_desktop_screenshot_gray():
@@ -60,10 +82,10 @@ class Clicker:
         self.wait_after_reviews_before_ok = 3
 
     def increase_time_between_reviews(self):
-        self.set_wait_time(self.wait_between_reviews*1.5, self.wait_between_ok, self.wait_after_reviews_before_ok)
+        self.set_wait_time(self.wait_between_reviews * 1.5, self.wait_between_ok, self.wait_after_reviews_before_ok)
 
     def decrease_time_between_reviews(self):
-        self.set_wait_time(self.wait_between_reviews/1.5, self.wait_between_ok, self.wait_after_reviews_before_ok)
+        self.set_wait_time(self.wait_between_reviews / 1.5, self.wait_between_ok, self.wait_after_reviews_before_ok)
 
     def set_wait_time(self, for_reviews, for_ok, for_after_reviews_before_ok):
         print('Current wait time between reviews {}'.format(for_reviews))
@@ -107,8 +129,6 @@ class Clicker:
 
 if __name__ == '__main__':
     print('Started')
-
-
 
     clicker = Clicker()
 
